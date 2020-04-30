@@ -1,0 +1,5 @@
+rootProject.name='CleanArchMe'
+include ':app'
+include ':data'
+include ':usecases'
+include ':domain'
