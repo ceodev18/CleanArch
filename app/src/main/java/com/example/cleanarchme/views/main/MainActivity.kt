@@ -1,6 +1,7 @@
 package com.example.cleanarchme.views.main
 
 import android.Manifest.permission.ACCESS_COARSE_LOCATION
+import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.util.Log
@@ -8,11 +9,11 @@ import com.example.cleanarchme.R
 import com.example.cleanarchme.data.AndroidPermissionChecker
 import com.example.cleanarchme.data.PlayServicesLocationDataSource
 import com.example.cleanarchme.views.common.PermissionRequester
-import com.example.cleanarchme.views.common.toast
 import com.example.cleanarchme.data.database.LocalDataSourceImpl
 import com.example.cleanarchme.data.database.MovieDataBase
 import com.example.cleanarchme.data.server.RemoteDataSourceImpl1
 import com.example.cleanarchme.data.server.Retrofit
+import com.example.cleanarchme.views.detail.DetailActivity
 import com.example.data.repository.MoviesRepository
 import com.example.data.repository.RegionRepository
 import com.example.domain.Movie
@@ -27,7 +28,7 @@ class MainActivity : AppCompatActivity(),
     private val permissionRequester = PermissionRequester(this, ACCESS_COARSE_LOCATION)
     private val moviesAdapter by lazy {
         MoviesAdapter {
-            toast("movie: ${it.title}")
+            presenter.onMovieClick(it.id)
         }
     }
 
@@ -35,6 +36,10 @@ class MainActivity : AppCompatActivity(),
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
 
+        setUp()
+    }
+
+    private fun setUp(){
         presenter = MainPresenterImpl(
             this,
             MainInteractorImpl(
@@ -63,7 +68,6 @@ class MainActivity : AppCompatActivity(),
         }
     }
 
-
     override fun onDestroy() {
         presenter.detach()
         super.onDestroy()
@@ -71,5 +75,11 @@ class MainActivity : AppCompatActivity(),
 
     override fun setupMovies(movies: List<Movie>) {
         moviesAdapter.movies = movies
+    }
+
+    override fun navigateToDetail(id: Int) {
+        val intent = Intent(this,DetailActivity::class.java)
+        intent.putExtra(DetailActivity.MOVIE_ID,id)
+        startActivity(intent)
     }
 }

@@ -29,4 +29,8 @@ class MainPresenterImpl(
             view?.setupMovies(movies)
         }
     }
+
+    override fun onMovieClick(id: Int) {
+        view?.navigateToDetail(id)
+    }
 }
