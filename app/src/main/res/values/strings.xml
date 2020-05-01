@@ -2,4 +2,12 @@
     <string name="app_name">CleanArchMe</string>
     <string name="fancy_movies">Fancy Movies</string>
     <string name="api_key">e462893643adb76db04afff8aa0f30c0</string>
+    <string name="all">Todas</string>
+    <string name="favorite">Favoritos</string>
+
+    <string-array name="movie_options">
+        <item>Todas</item>
+        <item>Favoritos</item>
+    </string-array>
+
 </resources>

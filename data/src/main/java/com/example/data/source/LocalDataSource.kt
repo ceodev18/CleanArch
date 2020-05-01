@@ -8,4 +8,5 @@ interface LocalDataSource {
     suspend fun saveMovies(movies: List<Movie>)
     suspend fun findById(id: Int): Movie
     suspend fun updateMovie(movie: Movie)
+    suspend fun getFavoriteMovies(): List<Movie>
 }

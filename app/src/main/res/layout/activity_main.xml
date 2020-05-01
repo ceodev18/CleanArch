@@ -18,13 +18,38 @@
         app:layout_constraintTop_toTopOf="parent">
 
 
-        <TextView
+        <LinearLayout
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:text="@string/fancy_movies"
-            android:textColor="@android:color/background_light"
-            android:textSize="24sp"
-            android:textStyle="bold" />
+            android:layout_height="match_parent"
+            android:orientation="horizontal">
+
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:text="@string/fancy_movies"
+                android:textColor="@android:color/background_light"
+                android:textSize="24sp"
+                android:textStyle="bold" />
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:background="@drawable/spinner_style"
+                android:layout_weight="1">
+
+                <Spinner
+                    android:id="@+id/spinner"
+                    style="@style/Widget.AppCompat.Spinner"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:layout_weight="1"
+                    android:background="@android:color/transparent"
+                    android:entries="@array/movie_options" />
+
+            </LinearLayout>
+
+        </LinearLayout>
 
     </androidx.appcompat.widget.Toolbar>
 
@@ -33,11 +58,11 @@
         android:layout_width="match_parent"
         android:layout_height="0dp"
         app:layoutManager="androidx.recyclerview.widget.GridLayoutManager"
-        app:spanCount="3"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        tools:listitem="@layout/row_movie"
-        app:layout_constraintTop_toBottomOf="@+id/toolbar" />
+        app:layout_constraintTop_toBottomOf="@+id/toolbar"
+        app:spanCount="3"
+        tools:listitem="@layout/row_movie" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>

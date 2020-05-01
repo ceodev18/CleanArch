@@ -26,5 +26,9 @@ class LocalDataSourceImpl(private val movieDao: MovieDao) : LocalDataSource {
     override suspend fun updateMovie(movie: Movie) =
         withContext(Dispatchers.IO) { movieDao.updateMovie(movie.toMovieDb()) }
 
+    override suspend fun getFavoriteMovies(): List<Movie> =
+        withContext(Dispatchers.IO) { movieDao.getFavoriteMovies().map { it.toDomain() } }
+
+
 
 }

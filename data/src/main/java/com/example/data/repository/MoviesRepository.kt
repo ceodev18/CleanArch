@@ -30,6 +30,10 @@ class MoviesRepository(
         return localDataSource.updateMovie(movie)
     }
 
+    suspend fun favoriteMovies() : List<Movie>{
+        return localDataSource.getFavoriteMovies()
+    }
+
 }
 
 

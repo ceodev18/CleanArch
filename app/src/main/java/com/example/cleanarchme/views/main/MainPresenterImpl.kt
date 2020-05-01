@@ -5,10 +5,11 @@ import kotlinx.coroutines.CoroutineDispatcher
 import kotlinx.coroutines.launch
 
 class MainPresenterImpl(
-    private var view: MainContract.MainView?,
     private val interactor: MainContract.MainInteractor,
     uiDispatcher: CoroutineDispatcher
 ) : MainContract.MainPresenter, Scope by Scope.Impl(uiDispatcher) {
+
+    private var view: MainContract.MainView? = null
 
     init {
         initScope()
@@ -32,5 +33,12 @@ class MainPresenterImpl(
 
     override fun onMovieClick(id: Int) {
         view?.navigateToDetail(id)
+    }
+
+    override fun onLoadFavoritesMovies() {
+        launch {
+            val movies = interactor.retrieveFavoritesMovies()
+            view?.setupMovies(movies)
+        }
     }
 }
