@@ -16,10 +16,4 @@ interface MainContract {
         fun onMovieClick(id: Int)
         fun onLoadFavoritesMovies()
     }
-
-    interface MainInteractor {
-        suspend fun retrieveMovies() : List<Movie>
-        suspend fun retrieveFavoritesMovies(): List<Movie>
-    }
-
 }

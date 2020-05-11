@@ -1,11 +1,14 @@
 package com.example.cleanarchme.views.main
 
 import com.example.cleanarchme.views.common.Scope
+import com.example.usecases.GetFavoritesMovies
+import com.example.usecases.GetPopularMovies
 import kotlinx.coroutines.CoroutineDispatcher
 import kotlinx.coroutines.launch
 
 class MainPresenterImpl(
-    private val interactor: MainContract.MainInteractor,
+    private val getPopularMovies: GetPopularMovies,
+    private val getFavoritesMovies: GetFavoritesMovies,
     uiDispatcher: CoroutineDispatcher
 ) : MainContract.MainPresenter, Scope by Scope.Impl(uiDispatcher) {
 
@@ -26,7 +29,7 @@ class MainPresenterImpl(
 
     override fun onLoadMovies() {
         launch {
-            val movies = interactor.retrieveMovies()
+            val movies = getPopularMovies.invoke()
             view?.setupMovies(movies)
         }
     }
@@ -37,7 +40,7 @@ class MainPresenterImpl(
 
     override fun onLoadFavoritesMovies() {
         launch {
-            val movies = interactor.retrieveFavoritesMovies()
+            val movies = getFavoritesMovies.invoke()
             view?.setupMovies(movies)
         }
     }

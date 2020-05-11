@@ -8,9 +8,11 @@ import com.example.cleanarchme.data.database.LocalDataSourceImpl
 import com.example.cleanarchme.data.database.MovieDataBase
 import com.example.cleanarchme.data.server.RemoteDataSourceImpl1
 import com.example.cleanarchme.data.server.Retrofit
+import com.example.cleanarchme.views.detail.DetailActivity
+import com.example.cleanarchme.views.detail.DetailContract
+import com.example.cleanarchme.views.detail.DetailPresenterImpl
 import com.example.cleanarchme.views.main.MainActivity
 import com.example.cleanarchme.views.main.MainContract
-import com.example.cleanarchme.views.main.MainInteractorImpl
 import com.example.cleanarchme.views.main.MainPresenterImpl
 import com.example.data.PermissionChecker
 import com.example.data.repository.MoviesRepository
@@ -19,7 +21,9 @@ import com.example.data.source.LocalDataSource
 import com.example.data.source.LocationDataSource
 import com.example.data.source.RemoteDataSource
 import com.example.usecases.GetFavoritesMovies
+import com.example.usecases.GetMovieById
 import com.example.usecases.GetPopularMovies
+import com.example.usecases.ToggleMovieFavorite
 import kotlinx.coroutines.CoroutineDispatcher
 import kotlinx.coroutines.Dispatchers
 import org.koin.android.ext.koin.androidApplication
@@ -50,20 +54,20 @@ private val appModule = module {
 
 val dataModule = module {
     factory { RegionRepository(get(), get()) }
-    factory { MoviesRepository(get(), get(),  get(named("apiKey")),get()) }
+    factory { MoviesRepository(get(), get(), get(named("apiKey")), get()) }
 }
 
 private val scopesModule = module {
     scope(named<MainActivity>()) {
 
-        scoped<MainContract.MainInteractor> {
-            MainInteractorImpl(GetPopularMovies(get()), GetFavoritesMovies(get()))
-        }
-
         scoped<MainContract.MainPresenter> {
-            MainPresenterImpl(get(),get())
+            MainPresenterImpl(GetPopularMovies(get()), GetFavoritesMovies(get()), get())
         }
     }
 
-
+    scope(named<DetailActivity>()) {
+        scoped<DetailContract.DetailPresenter> { (id: Int) ->
+            DetailPresenterImpl(GetMovieById(get()), ToggleMovieFavorite(get()), id, get())
+        }
+    }
 }

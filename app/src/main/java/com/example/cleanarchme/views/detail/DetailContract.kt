@@ -11,13 +11,8 @@ interface DetailContract {
 
     interface DetailPresenter {
         fun detach()
+        fun attach(view: DetailView)
         fun onLoadInfo()
         fun onFavoriteMovieClick()
     }
-
-    interface DetailInteractor {
-        suspend fun findMovieById(id: Int) : Movie
-        suspend fun favoriteMovie(movie: Movie) : Movie
-    }
-
 }

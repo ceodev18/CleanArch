@@ -4,7 +4,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="@android:color/background_dark"
+    android:background="@android:color/background_light"
     tools:context=".views.main.MainActivity">
 
 
@@ -12,7 +12,7 @@
         android:id="@+id/toolbar"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:background="@android:color/background_dark"
+        android:background="@android:color/background_light"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent">
@@ -28,7 +28,7 @@
                 android:layout_height="wrap_content"
                 android:layout_weight="1"
                 android:text="@string/fancy_movies"
-                android:textColor="@android:color/background_light"
+                android:textColor="@android:color/background_dark"
                 android:textSize="24sp"
                 android:textStyle="bold" />
 
@@ -40,11 +40,10 @@
 
                 <Spinner
                     android:id="@+id/spinner"
-                    style="@style/Widget.AppCompat.Spinner"
                     android:layout_width="match_parent"
                     android:layout_height="match_parent"
                     android:layout_weight="1"
-                    android:background="@android:color/transparent"
+                    android:background="@null"
                     android:entries="@array/movie_options" />
 
             </LinearLayout>

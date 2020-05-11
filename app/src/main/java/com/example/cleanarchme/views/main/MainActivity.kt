@@ -10,8 +10,6 @@ import com.example.cleanarchme.views.detail.DetailActivity
 import com.example.domain.Movie
 import kotlinx.android.synthetic.main.activity_main.*
 import org.koin.android.scope.lifecycleScope
-import org.koin.core.parameter.ParametersDefinition
-import org.koin.core.parameter.parametersOf
 
 class MainActivity : AppCompatActivity(),
     MainContract.MainView {
